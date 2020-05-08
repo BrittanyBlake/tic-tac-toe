@@ -48,11 +48,13 @@ TTTTTT  T:::::T  TTTTTTiiiiiii     cccccccccccccccc     TTTTTT  T:::::T  TTTTTTa
     if player_turn.odd?
       puts "#{player_1} choose a position"
       player1_position = gets.chomp
+      puts player1_position.to_s
     # check if position is valid
     # display board with updated position
     elsif player_turn.even?
       puts "#{player_2} choose a position"
       player2_position = gets.chomp
+      puts player2_position.to_s
       # check if position is valid
       # display board with updated position
     end
