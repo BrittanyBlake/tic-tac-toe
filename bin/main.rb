@@ -44,7 +44,7 @@ TTTTTT  T:::::T  TTTTTTiiiiiii     cccccccccccccccc     TTTTTT  T:::::T  TTTTTTa
 
   player_turn = 1
 
-  while game_over = false
+  while game_over == false
     if player_turn.odd?
       puts "#{player_1} choose a position"
       player1_position = gets.chomp
@@ -58,7 +58,7 @@ TTTTTT  T:::::T  TTTTTTiiiiiii     cccccccccccccccc     TTTTTT  T:::::T  TTTTTTa
     end
     # check for winner or tie
     # if there is a winner or a tie
-    game_over = true
+    # game_over == true if there is a winner or a tie
     # if winner is player 1"
     puts "#{player_1} won!"
     # if winner is player 2"
