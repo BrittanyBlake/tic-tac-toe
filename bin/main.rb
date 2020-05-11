@@ -58,6 +58,40 @@ puts ' 1 0 | 1 1 | 1 2 '
 puts '-----+-----+----'
 puts ' 2 0 | 2 1 | 2 2 '
 
+new_game = Logic.new(player1, player2, symbol1, symbol2)
+
+game_over = false
+turn = 1
+
+until game_over == true
+
+  puts 
+  new_game.board.print_board
+  puts 
+
+  if turn.odd?
+    puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :X)
+  elsif turn.even?
+    puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :O)
+  end
+
+  if new_game.win?(:X)
+    puts "#{player1.upcase} WON!!"
+    game_over = true
+  elsif new_game.win?(:O)
+    puts "#{player2.upcase} WON!!"
+    game_over = true
+  elsif new_game.board.empty_positions? == false
+    puts 'ITS A TIE!'
+    game_over = true
+  else
+    turn += 1
+  end
+
 
 
 end
