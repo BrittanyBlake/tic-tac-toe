@@ -64,7 +64,7 @@ i = false
 j = false
 until game_over
   puts
-  new_game.board.print_board
+  puts new_game.board.print_board
   puts
 
   if turn.odd?
@@ -111,15 +111,19 @@ until game_over
   end
 
   if new_game.win?(:X)
+    puts new_game.board.print_board
     puts "#{player1.upcase} WON!!"
     game_over = true
   elsif new_game.win?(:O)
+    puts new_game.board.print_board
     puts "#{player2.upcase} WON!!"
     game_over = true
   elsif new_game.board.empty_positions? == false
+    puts new_game.board.print_board
     puts 'ITS A TIE!'
     game_over = true
   else
+
     turn += 1
 
   end
