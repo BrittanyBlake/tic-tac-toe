@@ -53,25 +53,25 @@ puts ' 2 0 | 2 1 | 2 2 '
 new_game = Logic.new(player1, player2, symbol1, symbol2)
 game_over = false
 turn = 1
-until game_over == true
+until game_over
   puts
   puts new_game.board.print_board
   puts
   if turn.odd?
     puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position1 = gets.chomp.split(' ').map(&:to_i)
+    position1 = gets.chomp.split('').map(&:to_i)
     while new_game.board.invalid?(position1)
       puts 'position not valid please try again'
-      position1 = gets.chomp.split(' ').map(&:to_i)
+      position1 = gets.chomp.split('').map(&:to_i)
     end
     new_game.board.place_symbol(position1, :X)
 
   elsif turn.even?
     puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position2 = gets.chomp.split(' ').map(&:to_i)
+    position2 = gets.chomp.split('').map(&:to_i)
     while new_game.board.invalid?(position2)
       puts 'position not valid please try again'
-      position2 = gets.chomp.split(' ').map(&:to_i)
+      position2 = gets.chomp.split('').map(&:to_i)
     end
     new_game.board.place_symbol(position2, :O)
   end
