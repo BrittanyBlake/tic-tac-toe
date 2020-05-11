@@ -1,33 +1,44 @@
-
 class Board
   attr_accessor :grid
   def initialize
-    @grid = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    @grid = Array.new(3) { Array.new(3, '_') }
   end
 
-  def display
-    "1 | 2 | 3 \n --+---+--- \n 4 | 5 | 6\n --+---+--- \n 7 | 8 | 9"
+  def [](position)
+    row, col = position
+    @grid[row][col]
   end
 
-  def valid?(position)
-    indices = "1,2,3,4,5,6,7,8,9"
-    row1 = "123"
-    row2 = "456"
-    row3 = "789"
-    vert_idx = 0
-    if indices.include?(position)
-      vert_idx = 0 if row1.include?(position)
-      vert_idx = 1 if row1.include?(position)
-      vert_idx = 2 if row1.include?(position)
+  def []=(position, value)
+    row, col = position
+    @grid[row][col] = value
+  end
 
-      @grid[vert_idx][position.to_i - 1] = "X" if vert_idx == 0
-      @grid[vert_idx][position.to_i - 4] = "X" if vert_idx == 1
-      @grid[vert_idx][position.to_i - 7] = "X" if vert_idx == 2
-
+  def valid?(pos)
+    _row, _col = pos
+    pos.all? do |i|
+      i >= 0 && i < @grid.length
     end
   end
 
- # def empty?(position)
-#
- # end
+  def empty?(pos)
+    self[pos] == '_'
+  end
+
+  def place_symbol(pos, symbol)
+    raise 'invalid move' if !valid?(pos) || !empty?(pos)
+    self[pos] = symbol
+  end
+
+  def empty_positions?
+    indices = (0...@grid.length).to_a
+    positions = indices.product(indices)
+    positions.any? { |pos| empty?(pos) }
+  end
+
+  def print_board
+    @grid.each do |row|
+      puts row.join(' ')
+    end
+  end
 end
