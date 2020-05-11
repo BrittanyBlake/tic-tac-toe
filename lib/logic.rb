@@ -24,7 +24,7 @@ class Logic
     @board.grid.transpose.any? { |col| col.all?(symbol) }
   end
 
-   def win_diagonal?(symbol)
+  def win_diagonal?(symbol)
     left_to_right = (0...@board.grid.length).all? do |i|
       position = [i, i]
       @board[position] == symbol
@@ -37,6 +37,4 @@ class Logic
   def win?(symbol)
     win_row?(symbol) || win_col?(symbol) || win_diagonal?(symbol)
   end
-
- 
 end
