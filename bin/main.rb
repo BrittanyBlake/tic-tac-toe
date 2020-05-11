@@ -56,20 +56,36 @@ until game_over == true
   puts
   if turn.odd?
     puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position = gets.chomp.split(' ').map(&:to_i)
-    new_game.board.place_symbol(position, :X)
+    position1 = gets.chomp.split(' ').map(&:to_i)
+    while new_game.board.invalid?(position1) 
+      puts 'position not valid please try again'
+      position1 = gets.chomp.split(' ').map(&:to_i)
+    end
+    new_game.board.place_symbol(position1, :X)
+
   elsif turn.even?
     puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position = gets.chomp.split(' ').map(&:to_i)
-    new_game.board.place_symbol(position, :O)
+    position2 = gets.chomp.split(' ').map(&:to_i)
+    while new_game.board.invalid?(position2) 
+      puts 'position not valid please try again'
+      position2 = gets.chomp.split(' ').map(&:to_i)
+    end
+    new_game.board.place_symbol(position2, :O)
   end
+
   if new_game.win?(:X)
+    puts new_game.board.print_board
+    puts 
     puts "#{player1.upcase} WON!!"
     game_over = true
   elsif new_game.win?(:O)
+    puts new_game.board.print_board
+    puts
     puts "#{player2.upcase} WON!!"
     game_over = true
   elsif new_game.board.empty_positions? == false
+    puts new_game.board.print_board
+    puts
     puts 'ITS A TIE!'
     game_over = true
   else
