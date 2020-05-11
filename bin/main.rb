@@ -76,6 +76,7 @@ until game_over == true
     new_game.board.place_symbol(position, :O)
   end
 
+
   if new_game.win?(:X)
     puts "#{player1.upcase} WON!!"
     game_over = true
@@ -87,6 +88,7 @@ until game_over == true
     game_over = true
   else
     turn += 1
+
   end
 
 end
