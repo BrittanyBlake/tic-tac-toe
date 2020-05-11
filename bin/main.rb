@@ -57,7 +57,7 @@ until game_over == true
   if turn.odd?
     puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
     position1 = gets.chomp.split(' ').map(&:to_i)
-    while new_game.board.invalid?(position1) 
+    while new_game.board.invalid?(position1)
       puts 'position not valid please try again'
       position1 = gets.chomp.split(' ').map(&:to_i)
     end
@@ -66,7 +66,7 @@ until game_over == true
   elsif turn.even?
     puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
     position2 = gets.chomp.split(' ').map(&:to_i)
-    while new_game.board.invalid?(position2) 
+    while new_game.board.invalid?(position2)
       puts 'position not valid please try again'
       position2 = gets.chomp.split(' ').map(&:to_i)
     end
@@ -75,7 +75,7 @@ until game_over == true
 
   if new_game.win?(:X)
     puts new_game.board.print_board
-    puts 
+    puts
     puts "#{player1.upcase} WON!!"
     game_over = true
   elsif new_game.win?(:O)

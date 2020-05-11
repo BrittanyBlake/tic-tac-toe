@@ -2,8 +2,8 @@ require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
 class Logic
-  attr_reader :player1, :player2, :current_player
-  attr_accessor :board
+  attr_reader :player1, :player2, :current_player, :board
+  attr_writer :board
 
   def initialize(name1, symbol1, name2, symbol2)
     @player1 = Player.new(name1, symbol1)
