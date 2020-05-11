@@ -18,7 +18,10 @@ puts "#{player1} your symbol will be 'X'"
 symbol1 = 'X'
 puts 'Player 2, please enter your name'
 player2 = gets.chomp.capitalize
-puts 'Please enter a name' while player2.empty?
+while player2.empty?
+  puts 'Please enter a name'
+  player2 = gets.chomp.capitalize
+end
 puts "#{player2} your symbol will be 'O'"
 symbol2 = 'O'
 puts "TTTTTTTTTTTTTTTTTTTTTTT  iiii                           TTTTTTTTTTTTTTTTTTTTTTT                                        TTTTTTTTTTTTTTTTTTTTTTT
