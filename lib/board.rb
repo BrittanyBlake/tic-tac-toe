@@ -27,6 +27,7 @@ class Board
 
   def place_symbol(pos, symbol)
     raise 'invalid move' if !valid?(pos) || !empty?(pos)
+
     self[pos] = symbol
   end
 

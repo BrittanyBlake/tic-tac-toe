@@ -13,20 +13,17 @@ puts "██╗    ██╗███████╗██╗      ████�
 
 puts 'Player 1, please enter your name'
 player1 = gets.chomp.capitalize
-until !player1.empty?
-  puts "Please enter a name"
+while player1.empty?
+  puts 'Please enter a name'
   player1 = gets.chomp.capitalize
 end
-
 
 puts "#{player1} your symbol will be 'X'"
 symbol1 = 'X'
 
 puts 'Player 2, please enter your name'
 player2 = gets.chomp.capitalize
-until !player2.empty?
-  puts "Please enter a name"
-end
+puts 'Please enter a name' while player2.empty?
 
 puts "#{player2} your symbol will be 'O'"
 symbol2 = 'O'
@@ -49,8 +46,8 @@ TTTTTT  T:::::T  TTTTTTiiiiiii     cccccccccccccccc     TTTTTT  T:::::T  TTTTTTa
       TTTTTTTTTTT      iiiiiiii    cccccccccccccccc           TTTTTTTTTTT      aaaaaaaaaa  aaaa   cccccccccccccccc           TTTTTTTTTTT      ooooooooooo       eeeeeeeeeeeeee"
 puts
 puts "Let's play!"
-puts 
-puts "Here are position coordinates:"
+puts
+puts 'Here are position coordinates:'
 puts
 puts ' 0 0 | 0 1 | 0 2 '
 puts '-----+-----+----'
@@ -65,9 +62,9 @@ turn = 1
 
 until game_over == true
 
-  puts 
+  puts
   new_game.board.print_board
-  puts 
+  puts
 
   if turn.odd?
     puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
@@ -91,7 +88,5 @@ until game_over == true
   else
     turn += 1
   end
-
-
 
 end
