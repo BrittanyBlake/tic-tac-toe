@@ -1,29 +1,33 @@
 #!/usr/bin/env ruby
+
 require_relative '../lib/logic.rb'
 require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
+
 puts "██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗██╗
 ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝██║
 ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  ██║
 ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  ╚═╝
 ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗██╗
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝"
+
 puts 'Player 1, please enter your name'
 player1 = gets.chomp.capitalize
 while player1.empty?
   puts 'Please enter a name'
   player1 = gets.chomp.capitalize
 end
+
 puts "#{player1} your symbol will be 'X'"
 symbol1 = 'X'
+
 puts 'Player 2, please enter your name'
 player2 = gets.chomp.capitalize
-while player2.empty?
-  puts 'Please enter a name'
-  player2 = gets.chomp.capitalize
-end
+puts 'Please enter a name' while player2.empty?
+
 puts "#{player2} your symbol will be 'O'"
 symbol2 = 'O'
+
 puts "TTTTTTTTTTTTTTTTTTTTTTT  iiii                           TTTTTTTTTTTTTTTTTTTTTTT                                        TTTTTTTTTTTTTTTTTTTTTTT
 T:::::::::::::::::::::T i::::i                          T:::::::::::::::::::::T                                        T:::::::::::::::::::::T
 T:::::::::::::::::::::T  iiii                           T:::::::::::::::::::::T                                        T:::::::::::::::::::::T
@@ -50,48 +54,40 @@ puts '-----+-----+----'
 puts ' 1 0 | 1 1 | 1 2 '
 puts '-----+-----+----'
 puts ' 2 0 | 2 1 | 2 2 '
+
 new_game = Logic.new(player1, player2, symbol1, symbol2)
+
 game_over = false
 turn = 1
-until game_over
+
+until game_over == true
+
   puts
-  puts new_game.board.print_board
+  new_game.board.print_board
   puts
+
   if turn.odd?
     puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position1 = gets.chomp.split('').map(&:to_i)
-    while new_game.board.invalid?(position1)
-      puts 'position not valid please try again'
-      position1 = gets.chomp.split('').map(&:to_i)
-    end
-    new_game.board.place_symbol(position1, :X)
-
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :X)
   elsif turn.even?
     puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position2 = gets.chomp.split('').map(&:to_i)
-    while new_game.board.invalid?(position2)
-      puts 'position not valid please try again'
-      position2 = gets.chomp.split('').map(&:to_i)
-    end
-    new_game.board.place_symbol(position2, :O)
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :O)
   end
 
   if new_game.win?(:X)
-    puts new_game.board.print_board
-    puts
     puts "#{player1.upcase} WON!!"
     game_over = true
   elsif new_game.win?(:O)
-    puts new_game.board.print_board
-    puts
     puts "#{player2.upcase} WON!!"
     game_over = true
   elsif new_game.board.empty_positions? == false
-    puts new_game.board.print_board
-    puts
     puts 'ITS A TIE!'
     game_over = true
   else
     turn += 1
+
   end
+
 end
