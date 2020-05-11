@@ -48,9 +48,5 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
-Style/BlockNesting:
-  Enabled: false
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: false
-Style/ExponentialNotation:
+Metrics/BlockNesting:
   Enabled: false
