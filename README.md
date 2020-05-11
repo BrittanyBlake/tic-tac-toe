@@ -94,11 +94,11 @@ To play our game, first, clone the repository, navigate to it's containing direc
 
 The layout of the positions are as follows:
 
-0 0 | 0 1 | 0 2
-----+-----+----
-1 0 | 1 1 | 1 2
-----+-----+----
-2 0 | 2 1 | 2 2
+" 0 0 | 0 1 | 0 2
+  ----+-----+----
+  1 0 | 1 1 | 1 2
+  ----+-----+----
+  2 0 | 2 1 | 2 2 "
 
 <!-- CONTACT -->
 ## Authors
