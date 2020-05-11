@@ -3,42 +3,40 @@ class Board
   def initialize
     @grid = Array.new(3) { Array.new(3, '_') }
   end
-
   def [](position)
     row, col = position
     @grid[row][col]
   end
-
   def []=(position, value)
     row, col = position
     @grid[row][col] = value
   end
-
   def valid?(pos)
     _row, _col = pos
     pos.all? do |i|
       i >= 0 && i < @grid.length
     end
   end
-
   def empty?(pos)
     self[pos] == '_'
   end
-
   def place_symbol(pos, symbol)
-    raise 'invalid move' if !valid?(pos) || !empty?(pos)
+    while !valid?(pos) || !empty?(pos)
     self[pos] = symbol
+    end
   end
-
   def empty_positions?
     indices = (0...@grid.length).to_a
     positions = indices.product(indices)
     positions.any? { |pos| empty?(pos) }
   end
-
   def print_board
-    @grid.each do |row|
-      puts row.join(' ')
-    end
+    <<~MLS
+        #{@grid[0][0]} | #{@grid[0][1]} | #{@grid[0][2]}
+        --+---+--
+        #{@grid[1][0]} | #{@grid[1][1]} | #{@grid[1][2]}
+        --+---+--
+        #{@grid[2][0]} | #{@grid[2][1]} | #{@grid[0][1]}
+    MLS
   end
 end
