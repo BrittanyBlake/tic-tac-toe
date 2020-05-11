@@ -34,5 +34,9 @@ class Logic
     left_to_right || right_to_left
   end
 
+  def win?(symbol)
+    win_row?(symbol) || win_col?(symbol) || win_diagonal?(symbol)
+  end
+
  
 end
