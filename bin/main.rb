@@ -1,21 +1,34 @@
 #!/usr/bin/env ruby
 
-class Interface
-  puts "██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗██╗
+require_relative '../lib/logic.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+
+puts "██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗██╗
 ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝██║
 ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  ██║
 ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  ╚═╝
 ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗██╗
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝"
 
-  # get user inputs
-  puts 'player 1, please enter your name'
+puts 'Player 1, please enter your name'
+player1 = gets.chomp.capitalize
+while player1.empty?
+  puts 'Please enter a name'
   player1 = gets.chomp.capitalize
-  puts 'player 2, please enter your name'
-  player2 = gets.chomp.capitalize
-  puts "#{player1} is X and #{player2} is O"
+end
 
-  puts "TTTTTTTTTTTTTTTTTTTTTTT  iiii                           TTTTTTTTTTTTTTTTTTTTTTT                                        TTTTTTTTTTTTTTTTTTTTTTT
+puts "#{player1} your symbol will be 'X'"
+symbol1 = 'X'
+
+puts 'Player 2, please enter your name'
+player2 = gets.chomp.capitalize
+puts 'Please enter a name' while player2.empty?
+
+puts "#{player2} your symbol will be 'O'"
+symbol2 = 'O'
+
+puts "TTTTTTTTTTTTTTTTTTTTTTT  iiii                           TTTTTTTTTTTTTTTTTTTTTTT                                        TTTTTTTTTTTTTTTTTTTTTTT
 T:::::::::::::::::::::T i::::i                          T:::::::::::::::::::::T                                        T:::::::::::::::::::::T
 T:::::::::::::::::::::T  iiii                           T:::::::::::::::::::::T                                        T:::::::::::::::::::::T
 T:::::TT:::::::TT:::::T                                 T:::::TT:::::::TT:::::T                                        T:::::TT:::::::TT:::::T
@@ -31,44 +44,50 @@ TTTTTT  T:::::T  TTTTTTiiiiiii     cccccccccccccccc     TTTTTT  T:::::T  TTTTTTa
       T:::::::::T      i::::::i c:::::::::::::::::c           T:::::::::T    a:::::aaaa::::::a c:::::::::::::::::c           T:::::::::T   o:::::::::::::::o e::::::::eeeeeeee
       T:::::::::T      i::::::i  cc:::::::::::::::c           T:::::::::T     a::::::::::aa:::a cc:::::::::::::::c           T:::::::::T    oo:::::::::::oo   ee:::::::::::::e
       TTTTTTTTTTT      iiiiiiii    cccccccccccccccc           TTTTTTTTTTT      aaaaaaaaaa  aaaa   cccccccccccccccc           TTTTTTTTTTT      ooooooooooo       eeeeeeeeeeeeee"
+puts
+puts "Let's play!"
+puts
+puts 'Here are position coordinates:'
+puts
+puts ' 0 0 | 0 1 | 0 2 '
+puts '-----+-----+----'
+puts ' 1 0 | 1 1 | 1 2 '
+puts '-----+-----+----'
+puts ' 2 0 | 2 1 | 2 2 '
+
+new_game = Logic.new(player1, player2, symbol1, symbol2)
+
+game_over = false
+turn = 1
+
+until game_over == true
+
   puts
-  puts "Let's play!"
+  new_game.board.print_board
   puts
-  puts ' 1 | 2 | 3 '
-  puts '---+---+---'
-  puts ' 4 | 5 | 6 '
-  puts '---+---+---'
-  puts ' 6 | 7 | 9 '
 
-  game_over = false
+  if turn.odd?
+    puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :X)
+  elsif turn.even?
+    puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    position = gets.chomp.split(' ').map(&:to_i)
+    new_game.board.place_symbol(position, :O)
+  end
 
-  player_turn = 1
-
-  while game_over == false
-    if player_turn.odd?
-      puts "#{player_1} choose a position"
-      player1_position = gets.chomp
-      puts player1_position.to_s
-    # check if position is valid
-    # display board with updated position
-    elsif player_turn.even?
-      puts "#{player_2} choose a position"
-      player2_position = gets.chomp
-      puts player2_position.to_s
-      # check if position is valid
-      # display board with updated position
-    end
-    # check for winner or tie
-    # if there is a winner or a tie
-    # game_over == true if there is a winner or a tie
-    # if winner is player 1"
-    puts "#{player_1} won!"
-    # if winner is player 2"
-    puts "#{player_2} won!"
-    # if there is a tie
-    puts 'There was a tie!'
-    # if there is no winner or tie game_over is still false
-    player_turn += 1
+  if new_game.win?(:X)
+    puts "#{player1.upcase} WON!!"
+    game_over = true
+  elsif new_game.win?(:O)
+    puts "#{player2.upcase} WON!!"
+    game_over = true
+  elsif new_game.board.empty_positions? == false
+    puts 'ITS A TIE!'
+    game_over = true
+  else
+    turn += 1
 
   end
+
 end
