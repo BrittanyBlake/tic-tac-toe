@@ -68,7 +68,7 @@ until game_over
   puts
 
   if turn.odd?
-    puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    puts "#{player1} please enter two numbers representing a position in the format `row col` "
     position1 = gets.chomp.split('')
     while i == false
       if !inputs.include?(position1.join(''))
@@ -89,7 +89,7 @@ until game_over
     new_game.board.place_symbol(position1.map(&:to_i), :X)
 
   elsif turn.even?
-    puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
+    puts "#{player2} please enter two numbers representing a position in the format `row col`"
     position2 = gets.chomp.split('')
     while j == false
       if !inputs.include?(position2.join(''))
