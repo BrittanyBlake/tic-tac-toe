@@ -20,10 +20,13 @@ class Board
   def empty?(pos)
     self[pos] == '_'
   end
+
+  def invalid?(pos)
+   !valid?(pos) || !empty?(pos)
+  end
+
   def place_symbol(pos, symbol)
-    while !valid?(pos) || !empty?(pos)
     self[pos] = symbol
-    end
   end
   def empty_positions?
     indices = (0...@grid.length).to_a
