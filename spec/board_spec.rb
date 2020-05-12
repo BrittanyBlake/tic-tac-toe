@@ -36,4 +36,16 @@ RSpec.describe Board do
       end
     end
 
+    describe '#valid?' do
+      it 'should check if the given position exists on the board' do
+        pos = [2, 2]
+        expect(board.valid?(pos)).to eq(true)
+      end
+
+      it 'should return false if the given position does not exist on the board' do
+        pos = [3, 3]
+        expect(board.valid?(pos)).to eq(false)
+      end
+    end
+
 end
