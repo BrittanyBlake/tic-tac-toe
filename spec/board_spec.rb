@@ -101,4 +101,32 @@ RSpec.describe Board do
       expect(grid[1][2]).not_to eq('X')
     end
   end
+
+  describe '#empty_positions?' do
+    it 'should return false if there are no longer any available positions on the board' do
+    grid[0][0] = 'X'
+    grid[0][1] = 'O'
+    grid[0][2] = 'X'
+    grid[1][0] = 'O'
+    grid[1][1] = 'O'
+    grid[1][2] = 'X'
+    grid[2][0] = 'O'
+    grid[2][1] = 'X'
+    grid[2][2] = 'O'
+    expect(board.empty_positions?).to eq(false)
+    end
+    
+    it 'should return true if there are any available spaces on the board' do
+      grid[0][0] = 'X'
+      grid[0][1] = 'O'
+      grid[0][2]
+      grid[1][0] = 'O'
+      grid[1][1] = 'O'
+      grid[1][2] = 'X'
+      grid[2][0] = 'O'
+      grid[2][1] = 'X'
+      grid[2][2] = 'O'
+      expect(board.empty_positions?).to eq(true)
+    end
+  end
 end
