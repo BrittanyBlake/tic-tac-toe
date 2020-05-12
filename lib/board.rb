@@ -11,10 +11,10 @@ class Board
     @grid[row][col]
   end
 
-   def []=(position, value)
-     row, col = position
-     @grid[row][col] = value
-   end
+  def []=(position, value)
+    row, col = position
+    @grid[row][col] = value
+  end
 
   def valid?(pos)
     _row, _col = pos
