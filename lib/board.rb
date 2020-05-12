@@ -1,6 +1,5 @@
 class Board
   attr_reader :grid
-  attr_writer :grid
 
   def initialize
     @grid = Array.new(3) { Array.new(3, '_') }
