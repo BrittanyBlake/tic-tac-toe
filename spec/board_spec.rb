@@ -47,4 +47,19 @@ RSpec.describe Board do
       expect(board.valid?(pos)).to eq(false)
     end
   end
+
+  describe '#empty?' do
+    it 'should check if the given position was not already chosen' do
+      pos = [0, 0]
+      expect(board.empty?(pos)).to eq(true)
+    end
+
+    it 'should return false if the given position already does not have a symbol on it' do
+      grid[0][0] = 'X'
+      pos = [0, 0]
+      expect(board.empty?(pos)).to eq(false)
+    end
+
+    
+  end
 end
