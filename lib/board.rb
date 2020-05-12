@@ -1,5 +1,7 @@
 class Board
-  attr_accessor :grid
+  attr_reader :grid
+  attr_writer :grid
+
   def initialize
     @grid = Array.new(3) { Array.new(3, '_') }
   end
@@ -9,10 +11,10 @@ class Board
     @grid[row][col]
   end
 
-  def []=(position, value)
-    row, col = position
-    @grid[row][col] = value
-  end
+   def []=(position, value)
+     row, col = position
+     @grid[row][col] = value
+   end
 
   def valid?(pos)
     _row, _col = pos
