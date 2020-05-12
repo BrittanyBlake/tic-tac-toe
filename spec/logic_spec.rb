@@ -3,12 +3,12 @@ require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
 RSpec.describe Logic do
-  let(:logic) {Logic.new('Player1', 'X', 'Player2', 'O')}
-  let(:board) {logic.instance_variable_get(:@board)}
+  let(:logic) { Logic.new('Player1', 'X', 'Player2', 'O') }
+  let(:board) { logic.instance_variable_get(:@board) }
 
   describe '#win_row?' do
     it 'should accept symbol as an argument' do
-      expect{logic.win_row?(:X)}.not_to raise_error
+      expect { logic.win_row?(:X) }.not_to raise_error
     end
 
     it 'should return true if any row is filled with given symbol' do
@@ -28,7 +28,7 @@ RSpec.describe Logic do
 
   describe '#win_col?' do
     it 'should accept symbol as an argument' do
-      expect{logic.win_col?(:X)}.not_to raise_error
+      expect { logic.win_col?(:X) }.not_to raise_error
     end
 
     it 'should return true if any col is filled with given symbol' do
@@ -48,7 +48,7 @@ RSpec.describe Logic do
 
   describe '#win_diagonal?' do
     it 'should accept symbol as an argument' do
-      expect{logic.win_diagonal?(:X)}.not_to raise_error
+      expect { logic.win_diagonal?(:X) }.not_to raise_error
     end
 
     context 'direction: left to right' do
@@ -86,7 +86,7 @@ RSpec.describe Logic do
 
   describe '#win?' do
     it 'should accept symbol as an argument' do
-      expect{logic.win?(:O)}.not_to raise_error
+      expect { logic.win?(:O) }.not_to raise_error
     end
 
     it 'should return true if any row is filled with given symbol' do
