@@ -45,4 +45,26 @@ RSpec.describe Logic do
       expect(logic.win_col?('X')).to eq(false)
     end
   end
+
+  describe '#win_diagonal?' do
+    it 'should accept symbol as an argument' do
+      expect{logic.win_diagonal?(:X)}.not_to raise_error
+    end
+
+    context 'direction: left to right' do
+      it 'should return true if there is three of the given symbol in a row diagonaly' do
+        board[[0, 0]] = 'X'
+        board[[1, 1]] = 'X'
+        board[[2, 2]] = 'X'
+        expect(logic.win_diagonal?('X')).to eq(true)
+      end
+
+      it 'should return false if there is not three of the given symbol in a row diagonaly' do
+        board[[0, 0]] = 'X'
+        board[[1, 1]] = 'O'
+        board[[2, 2]] = 'X'
+        expect(logic.win_diagonal?('X')).to eq(false)
+      end
+    end
+  end
 end
