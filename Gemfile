@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 gem 'byebug'
 gem 'pry'
-gem 'rubocop'
 gem 'rspec'
+gem 'rubocop'
