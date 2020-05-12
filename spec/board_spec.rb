@@ -14,7 +14,12 @@ RSpec.describe Board do
         expect(grid).not_to eq([])
       end
     end
-
-   
+    
+    describe '#[]' do
+      it 'should accept a pair of indices to represent the chosen position on the board' do
+         pos = [0, 0]
+        expect(board[pos]).to eq(grid[0][0])
+      end
+    end
 
 end
