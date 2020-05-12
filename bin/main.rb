@@ -59,33 +59,71 @@ new_game = Logic.new(player1, player2, symbol1, symbol2)
 
 game_over = false
 turn = 1
-
-until game_over == true
-
+inputs = '012021102200'
+i = false
+j = false
+until game_over
   puts
-  new_game.board.print_board
+  puts new_game.board.print_board
   puts
 
   if turn.odd?
-    puts "#{player1} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position = gets.chomp.split(' ').map(&:to_i)
-    new_game.board.place_symbol(position, :X)
+    puts "#{player1} please enter two numbers representing a position in the format `row col` "
+    position1 = gets.chomp.split('')
+    while i == false
+      if !inputs.include?(position1.join(''))
+        puts 'Please only use numbers'
+        position1 = gets.chomp.split('')
+      elsif position1.join('').to_s.length != 2
+        puts 'Incorrect input! Please enter 2 numbers'
+        position1 = gets.chomp.split('')
+      else
+        i = true
+      end
+    end
+    i = false
+    while new_game.board.invalid?(position1.map(&:to_i))
+      puts 'position not valid please try again'
+      position1 = gets.chomp.split('').map(&:to_i)
+    end
+    new_game.board.place_symbol(position1.map(&:to_i), :X)
+
   elsif turn.even?
-    puts "#{player2} please enter two space separated numbers representing a position in the format `row col` (example: 0 0)"
-    position = gets.chomp.split(' ').map(&:to_i)
-    new_game.board.place_symbol(position, :O)
+    puts "#{player2} please enter two numbers representing a position in the format `row col`"
+    position2 = gets.chomp.split('')
+    while j == false
+      if !inputs.include?(position2.join(''))
+        puts 'Please only use numbers'
+        position2 = gets.chomp.split('')
+      elsif position2.join('').to_s.length != 2
+        puts 'Incorrect input! Please enter 2 numbers'
+        position2 = gets.chomp.split('')
+      else
+        j = true
+      end
+    end
+    j = false
+    while new_game.board.invalid?(position2.map(&:to_i))
+      puts 'position not valid please try again'
+      position2 = gets.chomp.split('').map(&:to_i)
+    end
+    new_game.board.place_symbol(position2.map(&:to_i), :O)
   end
 
   if new_game.win?(:X)
+    puts new_game.board.print_board
     puts "#{player1.upcase} WON!!"
     game_over = true
   elsif new_game.win?(:O)
+    puts new_game.board.print_board
     puts "#{player2.upcase} WON!!"
     game_over = true
   elsif new_game.board.empty_positions? == false
+    puts new_game.board.print_board
     puts 'ITS A TIE!'
     game_over = true
   else
+
     turn += 1
 
   end

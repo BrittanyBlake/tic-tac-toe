@@ -1,5 +1,7 @@
 class Board
-  attr_accessor :grid
+  attr_reader :grid
+  attr_writer :grid
+
   def initialize
     @grid = Array.new(3) { Array.new(3, '_') }
   end
@@ -25,9 +27,11 @@ class Board
     self[pos] == '_'
   end
 
-  def place_symbol(pos, symbol)
-    raise 'invalid move' if !valid?(pos) || !empty?(pos)
+  def invalid?(pos)
+    !valid?(pos) || !empty?(pos)
+  end
 
+  def place_symbol(pos, symbol)
     self[pos] = symbol
   end
 
@@ -38,8 +42,12 @@ class Board
   end
 
   def print_board
-    @grid.each do |row|
-      puts row.join(' ')
-    end
+    <<~MLS
+      #{@grid[0][0]} | #{@grid[0][1]} | #{@grid[0][2]}
+      --+---+--
+      #{@grid[1][0]} | #{@grid[1][1]} | #{@grid[1][2]}
+      --+---+--
+      #{@grid[2][0]} | #{@grid[2][1]} | #{@grid[2][2]}
+    MLS
   end
 end
