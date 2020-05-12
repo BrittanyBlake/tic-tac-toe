@@ -85,4 +85,20 @@ RSpec.describe Board do
       expect(board.invalid?(pos)).to eq(true)
     end
   end
+
+  describe '#place_symbol' do
+    it 'should place the given symbol in the given position' do
+      pos = [1, 2]
+      symbol = 'X'
+      board[pos] = symbol
+      expect(grid[1][2]).to eq('X')
+    end
+
+    it 'should not place the incorrect symbol in the given position' do
+      pos = [1, 2]
+      symbol = 'O'
+      board[pos] = symbol
+      expect(grid[1][2]).not_to eq('X')
+    end
+  end
 end
