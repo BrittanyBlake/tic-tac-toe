@@ -11,11 +11,6 @@ class Logic
     @board = Board.new
   end
 
-  def each_play(position, symbol)
-    @board.place_symbol(position, symbol)
-    @board.print_board
-  end
-
   def win_row?(symbol)
     @board.grid.any? { |row| row.all?(symbol) }
   end
